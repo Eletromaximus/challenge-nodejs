@@ -1,0 +1,46 @@
+{
+  "name": "challenge-codesh-nodejs",
+  "version": "1.0.0",
+  "description": "api que armazena e envia informações espaciais em utilizando-se de node.js, docker, testes e atualizações diárias por meio de CRON, as 9h e documentação baseada em Open API 3.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "cz",
+    "dev": "ts-node-dev src/server.ts"
+  },
+  "keywords": [
+    "node.js",
+    "docker",
+    "tests"
+  ],
+  "author": "Max Milliano",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^5.1.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.18.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.3",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
