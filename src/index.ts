@@ -3,6 +3,7 @@ import cors from 'cors'
 import 'express-async-errors'
 import helmet from 'helmet'
 import { routers } from './routes'
+import 'dotenv/config'
 
 const PORT = 3000
 const HOST = '0.0.0.0'
