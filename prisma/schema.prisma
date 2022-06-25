@@ -35,4 +35,6 @@ model Article {
     publishedAt String
     events      Event[]
     launches    Lauche[] 
+
+    @@map("articles")
 }

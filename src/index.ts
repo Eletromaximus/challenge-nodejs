@@ -4,11 +4,14 @@ import 'express-async-errors'
 import helmet from 'helmet'
 import { routers } from './routes'
 import 'dotenv/config'
+import { verifyAgenda } from './utils/verifyAgenda'
 
 const PORT = 3000
 const HOST = '0.0.0.0'
 
 const app = express()
+
+verifyAgenda()
 
 app.use(express.json())
 app.use(helmet())
