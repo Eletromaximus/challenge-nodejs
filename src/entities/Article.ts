@@ -1,18 +1,20 @@
+import { ArticleData } from './ArticleData'
+
 export class Article {
-  protected id!: string
-  private title!: string
-  private featured!: boolean
-  private imageUrl!: string
-  private url!: string
-  private newsSite!: string
-  private summary!: string
-  private publishedAt!: string
-  private launches!: {
+  public id!: number
+  public title!: string
+  public featured!: boolean
+  public imageUrl!: string
+  public url!: string
+  public newsSite!: string
+  public summary!: string
+  public publishedAt!: string
+  public launches!: {
     id: string,
     provider: string
   }[] | []
 
-  private events!: {
+  public events!: {
     id: string,
     provider: string
   }[] | []
@@ -22,7 +24,7 @@ export class Article {
     Object.freeze(this)
   }
 
-  public static create (props: Article) {
+  public static create (props: ArticleData) {
     if (!Article.validateArticle(props)) {
       throw new Error('Erro de validação')
     }
@@ -30,7 +32,7 @@ export class Article {
     return new Article(props)
   }
 
-  static validateArticle (props: Article) {
+  static validateArticle (props: ArticleData) {
     if (!props.id ||
       !props.featured ||
       !props.imageUrl ||

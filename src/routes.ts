@@ -1,7 +1,7 @@
 import { Router } from 'express'
 const routers = Router()
 
-routers.get('/', (req, res) => {
+routers.get('/', (_, res) => {
   return res.status(200).send({ message: 'Back-end Challenge 2021 🏅 - Space Flight News', en: `${String(process.env.MAX)}` })
 })
 
@@ -15,16 +15,16 @@ routers.get('/articles/:id', (req, res) => {
 
 routers.get('/articles', (req, res) => {
   try {
-    const page: number = Number(req.query.page) || 1
+    const start: number = Number(req.query.start) || 1
     const limit = Number(req.query.limit) || 10
 
-    const jump = (page - 1) * limit
+    const jump = (start - 1) * limit
 
-    if (page < 0 && limit < 0) {
+    if (start < 0 && limit < 0) {
       throw new Error('Bad Request')
     }
     return res.status(200).send({
-      message: `${page}, ${limit} e ${jump}`
+      message: `${start}, ${limit} e ${jump}`
     })
   } catch (error) {
     return res.send({
