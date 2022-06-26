@@ -10,31 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Lauche {
-  id        String  @id
-  article   Article @relation(fields: [laucheId], references: [id])
-  laucheId  String
-  provider  String
-}
-
-model Event {
-  id        String  @id
-  article   Article @relation(fields: [articleId], references: [id])
-  articleId String
-  provider  String
-}
-
 model Article {
-    id          String   @id() @unique
-    featured    Boolean  @default(false)
-    title       String
-    url         String
-    imageUrl    String
-    newsSite    String
-    summary     String
-    publishedAt String
-    events      Event[]
-    launches    Lauche[] 
+    id                Int   @id() @unique
+    featured          Boolean  @default(false)
+    title             String
+    url               String
+    imageUrl          String
+    newsSite          String
+    summary           String
+    publishedAt       String
+    eventsId          String[]
+    eventsProvider    String[]
+    launchesId        String[] 
+    launchesProvider  String[]
 
     @@map("articles")
 }
