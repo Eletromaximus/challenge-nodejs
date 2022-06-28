@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { adapterDB } from './database'
 const routers = Router()
 
 routers.get('/', (_, res) => {
@@ -14,24 +15,7 @@ routers.get('/articles/:id', (req, res) => {
 })
 
 routers.get('/articles', (req, res) => {
-  try {
-    const start: number = Number(req.query.start) || 1
-    const limit = Number(req.query.limit) || 10
-
-    const jump = (start - 1) * limit
-
-    if (start < 0 && limit < 0) {
-      throw new Error('Bad Request')
-    }
-    return res.status(200).send({
-      message: `${start}, ${limit} e ${jump}`
-    })
-  } catch (error) {
-    return res.send({
-      status: 400,
-      message: error
-    })
-  }
+  adapterDB.ArticlesAdapted(req, res)
 })
 
 routers.post('/articles', (req, res) => {

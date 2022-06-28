@@ -1,7 +1,5 @@
-import { ArticleData } from '../entities/ArticleData'
-import { Either } from '../utils/either'
-import { SendArticleError } from './errors/SendArticleError'
+import { Article } from '../entities/Article'
 
-export type ArticleClientResponse = Either<SendArticleError, ArticleData>
+export type ArticleClientResponse = Article
 
-export type ArticlesClientResponse = Either<SendArticleError, ArticleData[]>
+export type ArticlesClientResponse = Article[]
