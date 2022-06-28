@@ -34,7 +34,7 @@ export class Article {
 
   static validateArticle (props: ArticleData) {
     if (!props.id ||
-      !props.featured ||
+      // !props.featured ||
       !props.imageUrl ||
       !props.url ||
       !props.summary ||
@@ -45,9 +45,7 @@ export class Article {
       return false
     }
 
-    if (props.events.length > 0 &&
-      props.launches.length > 0
-    ) {
+    if (props.events.length > 0 && props.launches.length > 0) {
       const eventIsValid = props.events.filter(valor => {
         return typeof valor.id !== 'string' ||
           typeof valor.provider !== 'string'
@@ -58,11 +56,15 @@ export class Article {
           typeof valor.provider !== 'string'
       })
 
-      if (eventIsValid !== [] && lauchesIsValid !== []) {
+      if (eventIsValid.length > 0 && lauchesIsValid.length > 0) {
+        console.log(eventIsValid)
+        console.log(lauchesIsValid)
         return false
       }
 
       return true
     }
+
+    return true
   }
 }

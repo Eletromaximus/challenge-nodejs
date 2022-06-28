@@ -1,3 +1,4 @@
+import { Article } from '../entities/Article'
 import { ArticleData } from '../entities/ArticleData'
 import { ArticleBD } from './ArticleBD'
 import { ArticleClient } from './ArticleClient'
@@ -44,19 +45,19 @@ export class ArticleClientApi implements ArticleClient {
     const adapterArticles: ArticleData[] = articlesBD.map(article => {
       const events = article.eventsId.map((eventId, index) => {
         return {
-          id: eventId,
+          id: eventId.toString(),
           provider: article.eventsProvider[index]
         }
       })
 
       const launches = article.launchesId.map((launcheId, index) => {
         return {
-          id: launcheId,
+          id: launcheId.toString(),
           provider: article.launchesProvider[index]
         }
       })
 
-      return {
+      return Article.create({
         id: article.id,
         featured: article.featured,
         events,
@@ -67,7 +68,7 @@ export class ArticleClientApi implements ArticleClient {
         summary: article.summary,
         title: article.title,
         url: article.url
-      }
+      })
     })
 
     return adapterArticles
