@@ -13,10 +13,16 @@ export class PrismaDB {
     }
 
     const articlesDB: ArticleBD[] | [] = await this.prisma.article.findMany({
-      skip: 15 * (start || 1),
+      skip: 15 * (start || 0),
       take: 15
     })
 
     return articlesDB
+  }
+
+  async getArticlesForApi (articlesForBD: ArticleBD[]) {
+    await this.prisma.article.createMany({
+      data: articlesForBD
+    })
   }
 }

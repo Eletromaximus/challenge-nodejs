@@ -8,4 +8,5 @@ export interface ArticleClient {
   postArticle(article: ArticleData): Promise<void>
   changeArticle(id: number): Promise<void>
   deleteArticle(id: number): Promise<void>
+  articlesForBD(articles: ArticleData[]): ArticleBD[]
 }

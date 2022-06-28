@@ -1,12 +1,47 @@
-import { Article } from '../entities/Article'
 import { ArticleData } from '../entities/ArticleData'
 import { ArticleBD } from './ArticleBD'
 import { ArticleClient } from './ArticleClient'
 import { ArticlesClientResponse, ArticleClientResponse } from './ArticleClientResponse'
 
 export class ArticleClientApi implements ArticleClient {
+  articlesForBD (articles: ArticleData[]): ArticleBD[] {
+    const articlesForBD: ArticleBD[] = articles.map(article => {
+      const launchesId: string[] = []
+      const eventsId: string[] = []
+      const eventsProvider: string[] = []
+      const launchesProvider: string[] = []
+
+      article.events.forEach((event, index) => {
+        eventsId.push(event.id.toString())
+        eventsProvider.push(event.provider[index])
+      })
+
+      article.launches.forEach((launche, index) => {
+        launchesId.push(launche.id.toString())
+        launchesProvider.push(launche.provider[index])
+      })
+
+      return {
+        id: article.id,
+        eventsId,
+        launchesId,
+        eventsProvider,
+        launchesProvider,
+        featured: article.featured,
+        imageUrl: article.imageUrl,
+        newsSite: article.newsSite,
+        publishedAt: article.publishedAt,
+        summary: article.summary,
+        title: article.title,
+        url: article.url
+      }
+    })
+
+    return articlesForBD
+  }
+
   getArticles (articlesBD: ArticleBD[]): ArticlesClientResponse {
-    const adapterArticles: Article[] = articlesBD.map(article => {
+    const adapterArticles: ArticleData[] = articlesBD.map(article => {
       const events = article.eventsId.map((eventId, index) => {
         return {
           id: eventId,
@@ -21,7 +56,7 @@ export class ArticleClientApi implements ArticleClient {
         }
       })
 
-      return Article.create({
+      return {
         id: article.id,
         featured: article.featured,
         events,
@@ -32,7 +67,7 @@ export class ArticleClientApi implements ArticleClient {
         summary: article.summary,
         title: article.title,
         url: article.url
-      })
+      }
     })
 
     return adapterArticles

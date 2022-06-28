@@ -49,11 +49,13 @@ export class Article {
       props.launches.length > 0
     ) {
       const eventIsValid = props.events.filter(valor => {
-        return valor.id === '' || valor.provider === ''
+        return typeof valor.id !== 'string' ||
+          typeof valor.provider !== 'string'
       })
 
       const lauchesIsValid = props.launches.filter(valor => {
-        return valor.id === '' || valor.provider === ''
+        return typeof valor.id !== 'string' ||
+          typeof valor.provider !== 'string'
       })
 
       if (eventIsValid !== [] && lauchesIsValid !== []) {

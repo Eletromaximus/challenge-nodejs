@@ -15,7 +15,7 @@ routers.get('/articles/:id', (req, res) => {
 })
 
 routers.get('/articles', (req, res) => {
-  adapterDB.ArticlesAdapted(req, res)
+  adapterDB.articlesAdapted(req, res)
 })
 
 routers.post('/articles', (req, res) => {
