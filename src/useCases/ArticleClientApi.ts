@@ -31,7 +31,7 @@ export class ArticleClientApi implements ArticleClient {
         featured: article.featured,
         imageUrl: article.imageUrl,
         newsSite: article.newsSite,
-        publishedAt: article.publishedAt,
+        publishedAt: new Date(article.publishedAt),
         summary: article.summary,
         title: article.title,
         url: article.url
@@ -64,7 +64,7 @@ export class ArticleClientApi implements ArticleClient {
         launches,
         imageUrl: article.imageUrl,
         newsSite: article.newsSite,
-        publishedAt: article.publishedAt,
+        publishedAt: article.publishedAt.toString(),
         summary: article.summary,
         title: article.title,
         url: article.url

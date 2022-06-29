@@ -18,7 +18,7 @@ model Article {
     imageUrl          String
     newsSite          String
     summary           String
-    publishedAt       String
+    publishedAt       DateTime
     eventsId          String[]
     eventsProvider    String[]
     launchesId        String[] 

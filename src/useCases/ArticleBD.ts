@@ -6,7 +6,7 @@ export interface ArticleBD {
   url: string,
   newsSite: string,
   summary: string,
-  publishedAt: string,
+  publishedAt: Date,
   launchesId: string[],
   launchesProvider: string[],
   eventsId: string[],

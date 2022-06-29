@@ -14,7 +14,7 @@ export class PrismaDB {
 
     const articlesDB: ArticleBD[] | [] = await this.prisma.article.findMany({
       skip: 15 * (start || 0),
-      take: 15
+      take: 50
     })
 
     return articlesDB
