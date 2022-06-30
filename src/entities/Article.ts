@@ -1,4 +1,5 @@
 import { ArticleData } from './ArticleData'
+import { ValidateNameError } from './errors/ValidationNameError'
 
 export class Article {
   public readonly id!: number
@@ -24,15 +25,15 @@ export class Article {
     Object.freeze(this)
   }
 
-  static create (props: ArticleData) {
+  static create (props: ArticleData): Article {
     if (!Article.validateArticle(props)) {
-      throw new Error('Erro de validação')
+      throw new ValidateNameError()
     }
 
     return new Article(props)
   }
 
-  static validateArticle (props: ArticleData) {
+  static validateArticle (props: ArticleData): boolean {
     if (!props.id ||
       // !props.featured ||
       !props.imageUrl ||

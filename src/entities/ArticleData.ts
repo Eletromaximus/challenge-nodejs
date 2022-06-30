@@ -16,4 +16,5 @@ export interface ArticleData {
     id: string,
     provider: string
   }[] | []
+  health?: string
 }
