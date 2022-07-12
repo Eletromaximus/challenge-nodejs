@@ -21,8 +21,8 @@ routers.get('/articles', (req, res) => {
   adapterDB.articlesAdapted(req, res)
 })
 
-routers.post('/articles', (req, res) => {
-  return res.status(200).json('Em desenvolvimento')
+routers.post('/article', (req, res) => {
+  return adapterDB.postArticle(req, res)
 })
 
 routers.put('/articles/:id', (req, res) => {

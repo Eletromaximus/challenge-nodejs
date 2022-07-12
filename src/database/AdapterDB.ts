@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client'
 import { Request, Response } from 'express'
 import { ArticleData } from '../entities/ArticleData'
 import { ArticleClientApi } from '../useCases/ArticleClientApi'
@@ -72,6 +73,34 @@ export class AdapterDB {
       return res.status(200).json([])
     } catch (error: any) {
       return res.status(400).json({
+        message: error.message || 'Unexpected Error',
+      })
+    }
+  }
+
+  async postArticle(req: Request, res: Response) {
+    try {
+      const article = req.body
+
+      if (!article) {
+        throw new Error('Bad Request')
+      }
+
+      const articleDB = this.articleClientApi.postArticle(article)
+
+      await this.prismaDB.postArticle(articleDB)
+
+      return res.status(200)
+    } catch (error: any) {
+      if (error.message === 'Bad Request') {
+        return res.status(400).json({ message: error.message })
+      }
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        return res.status(400).json({
+          message: 'Article already exist',
+        })
+      }
+      return res.status(500).send({
         message: error.message || 'Unexpected Error',
       })
     }
