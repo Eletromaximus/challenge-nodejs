@@ -12,14 +12,19 @@ export class AdapterDB {
     this.prismaDB = prismaDB
   }
 
-  async articlesAdapted(req: Request, res: Response) {
+  async getArticles(req: Request, res: Response) {
     try {
       let { start } = req.query
 
       if (!start) {
         start = '1'
       }
+
       const page = Number(start) <= 0 ? 1 : Number(start) - 1
+
+      if (!Number.isInteger(page)) {
+        throw new Error('Bad Request')
+      }
 
       const articlesDb = await this.prismaDB.getArticles(page || 1)
 
@@ -61,10 +66,14 @@ export class AdapterDB {
     }
   }
 
-  async articleAdapted(req: Request, res: Response) {
+  async getArticle(req: Request, res: Response) {
     try {
-      const { id } = req.body
-      const articleDB = await this.prismaDB.getArticle(id)
+      const id = req.params.id
+
+      if (!id || Number(id) < 0 || !Number.isInteger(id)) {
+        throw new Error('Bad Params')
+      }
+      const articleDB = await this.prismaDB.getArticle(Number(id))
 
       if (articleDB) {
         const adaptedArticle = this.articleClientApi.getArticle(articleDB)

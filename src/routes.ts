@@ -9,16 +9,12 @@ routers.get('/', (_, res) => {
   })
 })
 
-routers.get('/articles/:id', (req, res) => {
-  const { id } = req.params
-  console.log(id)
-  return res.status(200).send({
-    message: `A página escolhida é ${id}`,
-  })
+routers.get('/article/:id', (req, res) => {
+  return adapterDB.getArticle(req, res)
 })
 
 routers.get('/articles', (req, res) => {
-  adapterDB.articlesAdapted(req, res)
+  adapterDB.getArticles(req, res)
 })
 
 routers.post('/article', (req, res) => {
