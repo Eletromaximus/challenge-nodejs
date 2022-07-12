@@ -6,9 +6,6 @@ import { PrismaDB } from './PrismaDB'
 const prisma = new PrismaClient()
 const articleClientApi = new ArticleClientApi()
 const prismaDB = new PrismaDB(prisma)
-const adapterDB = new AdapterDB(
-  articleClientApi,
-  prismaDB
-)
+const adapterDB = new AdapterDB(articleClientApi, prismaDB)
 
 export { adapterDB }

@@ -3,14 +3,17 @@ import { adapterDB } from './database'
 const routers = Router()
 
 routers.get('/', (_, res) => {
-  return res.status(200).send({ message: 'Back-end Challenge 2021 🏅 - Space Flight News', en: `${String(process.env.MAX)}` })
+  return res.status(200).send({
+    message: 'Back-end Challenge 2021 🏅 - Space Flight News',
+    en: `${String(process.env.MAX)}`,
+  })
 })
 
 routers.get('/articles/:id', (req, res) => {
   const { id } = req.params
   console.log(id)
   return res.status(200).send({
-    message: `A página escolhida é ${id}`
+    message: `A página escolhida é ${id}`,
   })
 })
 

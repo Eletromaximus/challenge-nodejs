@@ -1,31 +1,31 @@
-export class Left <L, A> {
+export class Left<L, A> {
   readonly value: L
 
-  constructor (value: L) {
+  constructor(value: L) {
     this.value = value
   }
 
-  isLeft (): this is Left<L, A> {
+  isLeft(): this is Left<L, A> {
     return true
   }
 
-  isRight (): this is Right<L, A> {
+  isRight(): this is Right<L, A> {
     return false
   }
 }
 
-export class Right <L, A> {
+export class Right<L, A> {
   readonly value: A
 
-  constructor (value: A) {
+  constructor(value: A) {
     this.value = value
   }
 
-  isRight (): this is Right<L, A> {
+  isRight(): this is Right<L, A> {
     return true
   }
 
-  isLeft (): this is Left<L, A> {
+  isLeft(): this is Left<L, A> {
     return false
   }
 }

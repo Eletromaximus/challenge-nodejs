@@ -7,14 +7,18 @@ export interface ArticleData {
   newsSite: string
   summary: string
   publishedAt: string
-  launches: {
-    id: string,
-    provider: string
-  }[] | []
+  launches:
+    | {
+        id: string
+        provider: string
+      }[]
+    | []
 
-  events: {
-    id: string,
-    provider: string
-  }[] | []
+  events:
+    | {
+        id: string
+        provider: string
+      }[]
+    | []
   health?: string
 }

@@ -1,7 +1,7 @@
 import { UseCaseError } from './UseCaseError'
 
 export class BadParamsArticleError extends Error implements UseCaseError {
-  constructor () {
+  constructor() {
     super('Bad request')
     this.name = 'Bad Request'
   }

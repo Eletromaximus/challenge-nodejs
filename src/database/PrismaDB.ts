@@ -3,26 +3,34 @@ import { ArticleBD } from '../useCases/ArticleBD'
 import { BadParamsArticleError } from './errors/BadParamsArticleError'
 
 export class PrismaDB {
-  constructor (private prisma: PrismaClient) {
+  constructor(private prisma: PrismaClient) {
     this.prisma = prisma
   }
 
-  async getArticles (start?: number): Promise<ArticleBD[] | []> {
+  async getArticles(start?: number): Promise<ArticleBD[] | []> {
     if (start && start <= 0) {
       throw new BadParamsArticleError()
     }
 
     const articlesDB: ArticleBD[] | [] = await this.prisma.article.findMany({
       skip: 15 * (start || 0),
-      take: 50
+      take: 15,
     })
 
     return articlesDB
   }
 
-  async getArticlesForApi (articlesForBD: ArticleBD[]) {
+  async getArticlesForApi(articlesForBD: ArticleBD[]) {
     await this.prisma.article.createMany({
-      data: articlesForBD
+      data: articlesForBD,
+    })
+  }
+
+  async getArticle(id: number) {
+    return await this.prisma.article.findUnique({
+      where: {
+        id,
+      },
     })
   }
 }
