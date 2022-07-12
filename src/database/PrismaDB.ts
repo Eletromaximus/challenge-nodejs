@@ -7,13 +7,13 @@ export class PrismaDB {
     this.prisma = prisma
   }
 
-  async getArticles(start?: number): Promise<ArticleBD[] | []> {
+  async getArticles(start: number): Promise<ArticleBD[] | []> {
     if (start && start <= 0) {
       throw new BadParamsArticleError()
     }
 
     const articlesDB: ArticleBD[] | [] = await this.prisma.article.findMany({
-      skip: 15 * (start || 0),
+      skip: 15 * start,
       take: 15,
     })
 

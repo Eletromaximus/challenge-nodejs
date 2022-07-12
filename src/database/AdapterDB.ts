@@ -13,9 +13,14 @@ export class AdapterDB {
 
   async articlesAdapted(req: Request, res: Response) {
     try {
-      const { start } = req.query
+      let { start } = req.query
 
-      const articlesDb = await this.prismaDB.getArticles(Number(start))
+      if (!start) {
+        start = '1'
+      }
+      const page = Number(start) <= 0 ? 1 : Number(start) - 1
+
+      const articlesDb = await this.prismaDB.getArticles(page || 1)
 
       const articles = this.articleClientApi.getArticles(articlesDb)
 
