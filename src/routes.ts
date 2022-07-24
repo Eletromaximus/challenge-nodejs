@@ -21,8 +21,8 @@ routers.post('/article', (req, res) => {
   return adapterDB.postArticle(req, res)
 })
 
-routers.put('/articles/:id', (req, res) => {
-  return res.status(200).json('Em desenvolvimento')
+routers.put('/article/:id', (req, res) => {
+  return adapterDB.putArticle(req, res)
 })
 
 routers.delete('/articles/:id', (req, res) => {

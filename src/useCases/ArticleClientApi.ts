@@ -77,8 +77,25 @@ export class ArticleClientApi implements ArticleClient {
     }
   }
 
-  changeArticle(props: IChange): void {
-    throw new Error('Method not implemented.')
+  changeArticle(articleBd: ArticleBD, changes: IChange): ArticleBD {
+    const article = this.getArticle(articleBd)
+
+    const changeArticle = new Article({
+      id: article.id,
+      events: changes.events || article.events,
+      featured: changes.featured || article.featured,
+      imageUrl: changes.imageUrl || article.imageUrl,
+      launches: changes.launches || article.launches,
+      newsSite: changes.newsSite || article.newsSite,
+      publishedAt: changes.publishedAt || article.publishedAt,
+      summary: changes.summary || article.summary,
+      title: changes.title || article.title,
+      url: changes.url || article.url,
+    })
+
+    const newArticleDB = this.postArticle(changeArticle)
+
+    return newArticleDB
   }
 
   deleteArticle(id: number): void {

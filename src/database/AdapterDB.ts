@@ -20,7 +20,7 @@ export class AdapterDB {
         start = '1'
       }
 
-      const page = Number(start) <= 0 ? 1 : Number(start) - 1
+      const page = Number(start) <= 0 ? 0 : Number(start) - 1
 
       if (!Number.isInteger(page)) {
         throw new Error('Bad Request')
@@ -69,11 +69,12 @@ export class AdapterDB {
   async getArticle(req: Request, res: Response) {
     try {
       const id = req.params.id
+      const idNumber = Number(id)
 
-      if (!id || Number(id) < 0 || !Number.isInteger(id)) {
+      if (!idNumber || idNumber < 0 || !Number.isInteger(idNumber)) {
         throw new Error('Bad Params')
       }
-      const articleDB = await this.prismaDB.getArticle(Number(id))
+      const articleDB = await this.prismaDB.getArticle(idNumber)
 
       if (articleDB) {
         const adaptedArticle = this.articleClientApi.getArticle(articleDB)
@@ -110,6 +111,33 @@ export class AdapterDB {
         })
       }
       return res.status(500).send({
+        message: error.message || 'Unexpected Error',
+      })
+    }
+  }
+
+  async putArticle(req: Request, res: Response) {
+    try {
+      const article = req.body
+      const id = Number(article.id)
+
+      if (!id || id < 0 || !Number.isInteger(id)) {
+        throw new Error('Bad Request')
+      }
+
+      const articleDB = await this.prismaDB.getArticle(id)
+
+      if (!articleDB) {
+        throw new Error('This article not Exist')
+      }
+
+      const newArticleDB = this.articleClientApi.changeArticle(articleDB, article)
+
+      const message = await this.prismaDB.putArticle(newArticleDB)
+
+      return res.status(200).json({ message })
+    } catch (error: any) {
+      return res.status(400).json({
         message: error.message || 'Unexpected Error',
       })
     }

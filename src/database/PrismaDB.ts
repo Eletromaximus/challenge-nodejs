@@ -45,4 +45,15 @@ export class PrismaDB {
 
     return post
   }
+
+  async putArticle(articleBd: ArticleBD): Promise<string> {
+    await this.prisma.article.update({
+      where: {
+        id: articleBd.id,
+      },
+      data: articleBd,
+    })
+
+    return 'ok'
+  }
 }
