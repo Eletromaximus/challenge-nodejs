@@ -34,9 +34,15 @@ export class PrismaDB {
     })
   }
 
-  async postArticle(articleBd: ArticleBD): Promise<void> {
-    await this.prisma.article.create({
-      data: articleBd,
-    })
+  async postArticle(articleBd: ArticleBD): Promise<number> {
+    const post = await this.prisma.article
+      .create({
+        data: articleBd,
+      })
+      .then((response) => {
+        return response.id
+      })
+
+    return post
   }
 }

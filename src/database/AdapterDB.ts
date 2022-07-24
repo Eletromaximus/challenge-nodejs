@@ -97,9 +97,9 @@ export class AdapterDB {
 
       const articleDB = this.articleClientApi.postArticle(article)
 
-      await this.prismaDB.postArticle(articleDB)
+      const postId = await this.prismaDB.postArticle(articleDB)
 
-      return res.status(200)
+      return res.status(200).json({ id: `${postId}` })
     } catch (error: any) {
       if (error.message === 'Bad Request') {
         return res.status(400).json({ message: error.message })
