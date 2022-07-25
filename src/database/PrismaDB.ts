@@ -56,4 +56,14 @@ export class PrismaDB {
 
     return 'ok'
   }
+
+  async delArticle(id: number): Promise<string> {
+    await this.prisma.article.delete({
+      where: {
+        id,
+      },
+    })
+
+    return 'ok'
+  }
 }

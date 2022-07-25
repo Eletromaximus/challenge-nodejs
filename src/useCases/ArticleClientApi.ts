@@ -97,8 +97,4 @@ export class ArticleClientApi implements ArticleClient {
 
     return newArticleDB
   }
-
-  deleteArticle(id: number): void {
-    throw new Error('Method not implemented.')
-  }
 }

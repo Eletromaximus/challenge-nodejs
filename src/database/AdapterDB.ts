@@ -142,4 +142,23 @@ export class AdapterDB {
       })
     }
   }
+
+  async deletArticle(req: Request, res: Response) {
+    try {
+      const { id } = req.body
+      const idNumber = Number(id)
+
+      if (!idNumber || idNumber < 0 || !Number.isInteger(idNumber)) {
+        throw new Error('Bad Request')
+      }
+
+      const message = await this.prismaDB.delArticle(idNumber)
+
+      return res.status(200).json(message)
+    } catch (error: any) {
+      return res.status(400).json({
+        message: error.message || 'Unexpected Error',
+      })
+    }
+  }
 }

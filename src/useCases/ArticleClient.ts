@@ -31,6 +31,5 @@ export interface ArticleClient {
   getArticle(articleDB: ArticleBD): ArticleClientResponse
   postArticle(article: ArticleData): ArticleBD
   changeArticle(articleDB: ArticleBD, changes: IChange): ArticleBD
-  deleteArticle(id: number): void
   articlesForBD(articles: ArticleData[]): ArticleBD[]
 }

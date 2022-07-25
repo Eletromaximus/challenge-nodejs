@@ -13,20 +13,21 @@ routers.get('/article/:id', (req, res) => {
   return adapterDB.getArticle(req, res)
 })
 
+routers
+  .route('/article')
+  .post((req, res) => {
+    return adapterDB.postArticle(req, res)
+  })
+  .delete((req, res) => {
+    return adapterDB.deletArticle(req, res)
+  })
+
 routers.get('/articles', (req, res) => {
   adapterDB.getArticles(req, res)
 })
 
-routers.post('/article', (req, res) => {
-  return adapterDB.postArticle(req, res)
-})
-
-routers.put('/article/:id', (req, res) => {
+routers.put('/articles/:id', (req, res) => {
   return adapterDB.putArticle(req, res)
-})
-
-routers.delete('/articles/:id', (req, res) => {
-  return res.status(200).json('Em desenvolvimento')
 })
 
 export { routers }
