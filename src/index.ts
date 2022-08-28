@@ -6,8 +6,7 @@ import { routers } from './routes'
 import 'dotenv/config'
 import { verifyAgenda } from './utils/verifyAgenda'
 
-const PORT = 3000
-const HOST = '0.0.0.0'
+// const HOST = process.env.HOST || '0.0.0.0'
 
 const app = express()
 
@@ -17,4 +16,6 @@ app.use(cors())
 verifyAgenda()
 app.use(routers)
 
-app.listen(PORT, HOST)
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Bem vindo ao server')
+})
