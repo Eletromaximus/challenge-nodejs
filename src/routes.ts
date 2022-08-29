@@ -10,24 +10,24 @@ routers.get('/', (_, res) => {
 })
 
 routers.get('/article/:id', (req, res) => {
-  return adapterDB.getArticle(req, res)
+  adapterDB.getArticle(req, res)
 })
 
 routers
   .route('/article')
   .post((req, res) => {
-    return adapterDB.postArticle(req, res)
+    adapterDB.postArticle(req, res)
   })
   .delete((req, res) => {
-    return adapterDB.deletArticle(req, res)
+    adapterDB.deletArticle(req, res)
   })
 
 routers.get('/articles', (req, res) => {
   adapterDB.getArticles(req, res)
 })
 
-routers.put('/articles/:id', (req, res) => {
-  return adapterDB.putArticle(req, res)
+routers.put('/articles', (req, res) => {
+  adapterDB.putArticle(req, res)
 })
 
 export { routers }

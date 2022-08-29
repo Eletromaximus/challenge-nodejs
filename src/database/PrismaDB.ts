@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import { ArticleBD } from '../useCases/ArticleBD'
+import { AdapterInterface } from './AdapterInterface'
 import { BadParamsArticleError } from './errors/BadParamsArticleError'
 
-export class PrismaDB {
+export class PrismaDB implements AdapterInterface {
   constructor(private prisma: PrismaClient) {
     this.prisma = prisma
   }
@@ -20,13 +21,13 @@ export class PrismaDB {
     return articlesDB
   }
 
-  async getArticlesForApi(articlesForBD: ArticleBD[]) {
+  async createArticlesForApi(articlesForBD: ArticleBD[]): Promise<void> {
     await this.prisma.article.createMany({
       data: articlesForBD,
     })
   }
 
-  async getArticle(id: number) {
+  async getArticle(id: number): Promise<ArticleBD | null> {
     return await this.prisma.article.findUnique({
       where: {
         id,
@@ -57,7 +58,7 @@ export class PrismaDB {
     return 'ok'
   }
 
-  async delArticle(id: number): Promise<string> {
+  async deletArticle(id: number): Promise<string> {
     await this.prisma.article.delete({
       where: {
         id,

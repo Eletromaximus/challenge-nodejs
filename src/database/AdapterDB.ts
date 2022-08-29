@@ -56,7 +56,7 @@ export class AdapterDB {
         })
 
       const articlesConverted = this.articleClientApi.articlesForBD(articlesFromApi)
-      this.prismaDB.getArticlesForApi(articlesConverted)
+      this.prismaDB.createArticlesForApi(articlesConverted)
 
       return res.status(200).json({ message: 'ok' })
     } catch (error: any) {
@@ -152,7 +152,7 @@ export class AdapterDB {
         throw new Error('Bad Request')
       }
 
-      const message = await this.prismaDB.delArticle(idNumber)
+      const message = await this.prismaDB.deletArticle(idNumber)
 
       return res.status(200).json(message)
     } catch (error: any) {
